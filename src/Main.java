@@ -23,13 +23,13 @@ public class Main {
 
                 String yesOrNo = SCANNER.nextLine();
 
-                if (yesOrNo.equals(BEGIN_THE_GAME)) {
+                if (yesOrNo.equalsIgnoreCase(BEGIN_THE_GAME)) {
 
                     newGameWord();
                     gameSession();
                     break;
 
-                }else if(yesOrNo.equals(END_THE_GAME)){
+                }else if(yesOrNo.equalsIgnoreCase(END_THE_GAME)){
 
                     gameBegin = false;
                     break;
