@@ -10,6 +10,7 @@ public class Main {
     private static final String END_THE_GAME = "Нет";
     private static final int FATAL = 6;
     private static final int DEFAULT_ARRAY_VALUE = 0;
+    private static final Path PATH_OF_NOUNS_FILE = Path.of("src/resources/Nouns.txt");
 
     public static void main(String[] args) throws IOException {
 
@@ -25,8 +26,14 @@ public class Main {
 
                 if (yesOrNo.equalsIgnoreCase(BEGIN_THE_GAME)) {
 
-                    newGameWord();
-                    gameSession();
+                    if(Files.exists(PATH_OF_NOUNS_FILE)){
+                        newGameWord();
+                        gameSession();
+                    }else{
+                        System.out.println("Файл со словами не найден. Игра будет завершена");
+                        gameBegin = false;
+                    }
+
                     break;
 
                 }else if(yesOrNo.equalsIgnoreCase(END_THE_GAME)){
@@ -89,8 +96,8 @@ public class Main {
     }
 
     public static void newGameWord() throws IOException {
-        Path path = Path.of("src/resources/Nouns.txt");
-        List<String> gameWords = Files.readAllLines(path);
+
+        List<String> gameWords = Files.readAllLines(PATH_OF_NOUNS_FILE);
 
         Random random = new Random();
         gameWord = gameWords.get(random.nextInt(gameWords.size()));
