@@ -51,7 +51,7 @@ public class Main {
     public static void gameSession(){
         int errors = 0;
         int foundLetters = 0;
-        HashSet<String> gameMistakes = new HashSet<>();
+        Set<String> gameMistakes = new HashSet<>();
         int[] indexOfGameWordLetter = new int[gameWord.length()];
 
         while(foundLetters < gameWord.length()){
@@ -130,7 +130,7 @@ public class Main {
                 break;
         }
 
-        return input;
+        return input.toLowerCase();
     }
 
     public static boolean isRussianLetter(char symbol){
