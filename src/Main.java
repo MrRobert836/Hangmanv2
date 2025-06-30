@@ -124,7 +124,7 @@ public class Main {
 
             if(checkLetterTooLong(input))
                 System.out.println("Введана строка. Необходимо ввести символ");
-            else if (isRussianLetter(input.charAt(0)))
+            else if (!isRussianLetter(input.charAt(0)))
                 System.out.println("Введён некорректный символ. Символ должен быть буквой русского алфавита");
             else
                 break;
