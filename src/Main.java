@@ -124,7 +124,7 @@ public class Main {
 
             if(checkLetterTooLong(input))
                 System.out.println("Введана строка. Необходимо ввести символ");
-            else if (checkLetterNotInAlphabet(input))
+            else if (isRussianLetter(input.charAt(0)))
                 System.out.println("Введён некорректный символ. Символ должен быть буквой русского алфавита");
             else
                 break;
@@ -133,14 +133,10 @@ public class Main {
         return input;
     }
 
-    public static boolean checkLetterNotInAlphabet(String input){
+    public static boolean isRussianLetter(char symbol){
 
-        String[] alphabet = new String[]{"а","б","в","г","д","е","ё","ж","з","и","й","к","л",
-                "м","н","о","п","р","с","т","у","ф","х","ц","ч","ш","щ","ъ","ы","ь","э","ю","я"};
-
-        int IndexOfLetter = Arrays.binarySearch(alphabet, input.toLowerCase());
-
-        return IndexOfLetter < 0;
+        symbol = Character.toLowerCase(symbol);
+        return (symbol >= 'а' && symbol <= 'я') || symbol == 'ё';
     }
 
     public static boolean checkLetterTooLong(String input){
