@@ -11,6 +11,7 @@ public class Main {
     private static final int FATAL = 6;
     private static final int DEFAULT_ARRAY_VALUE = 0;
     private static final Path PATH_OF_NOUNS_FILE = Path.of("src/resources/Nouns.txt");
+    private static int errors = 0;
 
     public static void main(String[] args) throws IOException {
 
@@ -49,17 +50,13 @@ public class Main {
     }
 
     public static void gameSession(){
-        int errors = 0;
         int foundLetters = 0;
         Set<String> gameMistakes = new HashSet<>();
         int[] indexOfGameWordLetter = new int[gameWord.length()];
 
         while(foundLetters < gameWord.length()){
 
-            System.out.println("Ошибки: " + errors);
-            System.out.print("Слово: ");
-            printCorrectLetters(indexOfGameWordLetter, gameWord);
-            Gallows(errors);
+            showSessionInfo(indexOfGameWordLetter);
             String letter = enterGameLetter();
 
             int indexOfLetter = gameWord.indexOf(letter);
@@ -89,10 +86,13 @@ public class Main {
             }
         }
 
-        if (errors == FATAL)
+        if (errors == FATAL){
+            showSessionInfo(indexOfGameWordLetter);
             System.out.println("ПОРАЖЕНИЕ!!!\n" + "Загаданное слово: " + gameWord);
-        else
+        } else{
+            showSessionInfo(indexOfGameWordLetter);
             System.out.println("ПОБЕДА!!!");
+        }
     }
 
     public static void newGameWord() throws IOException {
@@ -142,6 +142,13 @@ public class Main {
     public static boolean checkLetterTooLong(String input){
 
         return input.length() > 1;
+    }
+
+    private static void showSessionInfo(int[] indexOfGameWordLetter){
+        System.out.println("Ошибки: " + errors);
+        System.out.print("Слово: ");
+        printCorrectLetters(indexOfGameWordLetter, gameWord);
+        Gallows(errors);
     }
 
     public static void Gallows(int errors){
