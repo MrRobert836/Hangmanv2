@@ -51,22 +51,26 @@ public class Main {
 
     public static void gameSession(){
         int foundLetters = 0;
-        Set<String> gameMistakes = new HashSet<>();
+        Set<String> enteredLetters = new HashSet<>();
         int[] indexOfGameWordLetter = new int[gameWord.length()];
 
         while(foundLetters < gameWord.length()){
 
-            showSessionInfo(indexOfGameWordLetter);
+            showSessionInfo(indexOfGameWordLetter, enteredLetters);
             String letter = enterGameLetter();
+
+            if(enteredLetters.contains(letter)){
+                System.out.println("Данная буква уже была введена");
+                continue;
+            }else {
+                enteredLetters.add(letter);
+            }
 
             int indexOfLetter = gameWord.indexOf(letter);
 
             if(indexOfLetter < 0){
-                if(gameMistakes.contains(letter))
-                    continue;
 
                 errors++;
-                gameMistakes.add(letter);
 
                 if (errors == FATAL)
                     break;
@@ -87,10 +91,10 @@ public class Main {
         }
 
         if (errors == FATAL){
-            showSessionInfo(indexOfGameWordLetter);
+            showSessionInfo(indexOfGameWordLetter, enteredLetters);
             System.out.println("ПОРАЖЕНИЕ!!!\n" + "Загаданное слово: " + gameWord);
         } else{
-            showSessionInfo(indexOfGameWordLetter);
+            showSessionInfo(indexOfGameWordLetter, enteredLetters);
             System.out.println("ПОБЕДА!!!");
         }
     }
@@ -144,9 +148,15 @@ public class Main {
         return input.length() > 1;
     }
 
-    private static void showSessionInfo(int[] indexOfGameWordLetter){
+    private static void showSessionInfo(int[] indexOfGameWordLetter, Set<String> enteredLetters){
         System.out.println("Ошибки: " + errors);
-        System.out.print("Слово: ");
+        System.out.print("Введённые буквы: ");
+
+        for (String enteredLetter: enteredLetters){
+            System.out.print(enteredLetter + ", ");
+        }
+
+        System.out.print("\nСлово: ");
         printCorrectLetters(indexOfGameWordLetter, gameWord);
         Gallows(errors);
     }
