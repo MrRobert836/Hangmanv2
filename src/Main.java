@@ -49,7 +49,7 @@ public class Main {
         }
     }
 
-    public static void gameSession(){
+    private static void gameSession(){
         int foundLetters = 0;
         Set<String> enteredLetters = new HashSet<>();
         int[] indexOfGameWordLetter = new int[gameWord.length()];
@@ -99,7 +99,7 @@ public class Main {
         }
     }
 
-    public static void newGameWord() throws IOException {
+    private static void newGameWord() throws IOException {
 
         List<String> gameWords = Files.readAllLines(PATH_OF_NOUNS_FILE);
 
@@ -107,7 +107,7 @@ public class Main {
         gameWord = gameWords.get(random.nextInt(gameWords.size()));
     }
 
-    public static void printCorrectLetters (int [] indexOfGameWordLetter, String gameWord){
+    private static void printCorrectLetters (int [] indexOfGameWordLetter, String gameWord){
         for (int i = 0; i < gameWord.length(); i++){
             if(indexOfGameWordLetter[i] == DEFAULT_ARRAY_VALUE)
                 System.out.print("_");
@@ -118,7 +118,7 @@ public class Main {
         System.out.println();
     }
 
-    public static String enterGameLetter(){
+    private static String enterGameLetter(){
 
         String input;
 
@@ -137,13 +137,13 @@ public class Main {
         return input.toLowerCase();
     }
 
-    public static boolean isRussianLetter(char symbol){
+    private static boolean isRussianLetter(char symbol){
 
         symbol = Character.toLowerCase(symbol);
         return (symbol >= 'а' && symbol <= 'я') || symbol == 'ё';
     }
 
-    public static boolean checkLetterTooLong(String input){
+    private static boolean checkLetterTooLong(String input){
 
         return input.length() > 1;
     }
@@ -161,7 +161,7 @@ public class Main {
         Gallows(errors);
     }
 
-    public static void Gallows(int errors){
+    private static void Gallows(int errors){
         final String NO_ERRORS = """
                               ----------
                               |/     |
