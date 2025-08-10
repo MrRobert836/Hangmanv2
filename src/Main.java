@@ -4,7 +4,7 @@ import java.nio.file.Path;
 import java.nio.file.Files;
 
 public class Main {
-    private static String gameWord;
+    private static String word;
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final String BEGIN_THE_GAME = "Да";
     private static final String END_THE_GAME = "Нет";
@@ -15,31 +15,31 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        boolean gameBegin = true;
+        boolean begin = true;
 
-        while(gameBegin){
+        while(begin){
             System.out.println("Введите 'Да' если хотите начать новую игру. " +
                     "\nВведите 'Нет' если хотите выйти из игры");
 
             while(true){
 
-                String yesOrNo = SCANNER.nextLine();
+                String command = SCANNER.nextLine();
 
-                if (yesOrNo.equalsIgnoreCase(BEGIN_THE_GAME)) {
+                if (command.equalsIgnoreCase(BEGIN_THE_GAME)) {
 
                     if(Files.exists(PATH_OF_NOUNS_FILE)){
                         newGameWord();
                         gameSession();
                     }else{
                         System.out.println("Файл со словами не найден. Игра будет завершена");
-                        gameBegin = false;
+                        begin = false;
                     }
 
                     break;
 
-                }else if(yesOrNo.equalsIgnoreCase(END_THE_GAME)){
+                }else if(command.equalsIgnoreCase(END_THE_GAME)){
 
-                    gameBegin = false;
+                    begin = false;
                     break;
 
                 }else
@@ -52,11 +52,11 @@ public class Main {
     private static void gameSession(){
         int foundLetters = 0;
         Set<String> enteredLetters = new HashSet<>();
-        int[] indexOfGameWordLetter = new int[gameWord.length()];
+        int[] indexOfWordLetter = new int[word.length()];
 
-        while(foundLetters < gameWord.length()){
+        while(foundLetters < word.length()){
 
-            showSessionInfo(indexOfGameWordLetter, enteredLetters);
+            showSessionInfo(indexOfWordLetter, enteredLetters);
             String letter = enterGameLetter();
 
             if(enteredLetters.contains(letter)){
@@ -66,7 +66,7 @@ public class Main {
                 enteredLetters.add(letter);
             }
 
-            int indexOfLetter = gameWord.indexOf(letter);
+            int indexOfLetter = word.indexOf(letter);
 
             if(indexOfLetter < 0){
 
@@ -78,41 +78,41 @@ public class Main {
                 continue;
             }
 
-            for (int i = 0; i < gameWord.length(); i++) {
+            for (int i = 0; i < word.length(); i++) {
 
-                String gameWordLetter = Character.toString(gameWord.charAt(i));
+                String wordLetter = Character.toString(word.charAt(i));
 
-                if(letter.equalsIgnoreCase(gameWordLetter)){
+                if(letter.equalsIgnoreCase(wordLetter)){
                     foundLetters++;
                     //В массиве хранятся номера букв секретного слова с 1, а не с 0
-                    indexOfGameWordLetter[i] = i + 1;
+                    indexOfWordLetter[i] = i + 1;
                 }
             }
         }
 
         if (errors == FATAL){
-            showSessionInfo(indexOfGameWordLetter, enteredLetters);
-            System.out.println("ПОРАЖЕНИЕ!!!\n" + "Загаданное слово: " + gameWord);
+            showSessionInfo(indexOfWordLetter, enteredLetters);
+            System.out.println("ПОРАЖЕНИЕ!!!\n" + "Загаданное слово: " + word);
         } else{
-            showSessionInfo(indexOfGameWordLetter, enteredLetters);
+            showSessionInfo(indexOfWordLetter, enteredLetters);
             System.out.println("ПОБЕДА!!!");
         }
     }
 
     private static void newGameWord() throws IOException {
 
-        List<String> gameWords = Files.readAllLines(PATH_OF_NOUNS_FILE);
+        List<String> words = Files.readAllLines(PATH_OF_NOUNS_FILE);
 
         Random random = new Random();
-        gameWord = gameWords.get(random.nextInt(gameWords.size()));
+        word = words.get(random.nextInt(words.size()));
     }
 
-    private static void printCorrectLetters (int [] indexOfGameWordLetter, String gameWord){
-        for (int i = 0; i < gameWord.length(); i++){
-            if(indexOfGameWordLetter[i] == DEFAULT_ARRAY_VALUE)
+    private static void printCorrectLetters (int [] indexOfWordLetter, String word){
+        for (int i = 0; i < word.length(); i++){
+            if(indexOfWordLetter[i] == DEFAULT_ARRAY_VALUE)
                 System.out.print("_");
             else
-                System.out.print(gameWord.charAt(i));
+                System.out.print(word.charAt(i));
             System.out.print(".");
         }
         System.out.println();
@@ -148,7 +148,7 @@ public class Main {
         return input.length() > 1;
     }
 
-    private static void showSessionInfo(int[] indexOfGameWordLetter, Set<String> enteredLetters){
+    private static void showSessionInfo(int[] indexOfWordLetter, Set<String> enteredLetters){
         System.out.println("Ошибки: " + errors);
         System.out.print("Введённые буквы: ");
 
@@ -157,7 +157,7 @@ public class Main {
         }
 
         System.out.print("\nСлово: ");
-        printCorrectLetters(indexOfGameWordLetter, gameWord);
+        printCorrectLetters(indexOfWordLetter, word);
         Gallows(errors);
     }
 
