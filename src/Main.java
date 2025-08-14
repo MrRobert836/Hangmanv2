@@ -55,7 +55,7 @@ public class Main {
         Set<String> enteredLetters = new HashSet<>();
         int[] indexOfWordLetter = new int[word.length()];
 
-        while(foundLetters < word.length()){
+        while(!isGameOver()){
 
             showSessionInfo(indexOfWordLetter, enteredLetters);
             String letter = enterGameLetter();
@@ -99,6 +99,10 @@ public class Main {
         } else{
             System.out.println("ПОБЕДА!!!");
         }
+    }
+
+    private static boolean isGameOver(){
+        return foundLetters < word.length() || errors == FATAL;
     }
 
     private static void newGameWord() throws IOException {
