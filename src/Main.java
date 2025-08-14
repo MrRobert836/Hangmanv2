@@ -57,7 +57,7 @@ public class Main {
 
         while(!isGameOver()){
 
-            showSessionInfo(indexOfWordLetter, enteredLetters);
+            printSessionInfo(indexOfWordLetter, enteredLetters);
             String letter = enterGameLetter();
 
             if(enteredLetters.contains(letter)){
@@ -88,13 +88,8 @@ public class Main {
             }
         }
 
-        showSessionInfo(indexOfWordLetter, enteredLetters);
-
-        if (errors == FATAL){
-            System.out.println("ПОРАЖЕНИЕ!!!\n" + "Загаданное слово: " + word);
-        } else{
-            System.out.println("ПОБЕДА!!!");
-        }
+        printSessionInfo(indexOfWordLetter, enteredLetters);
+        printEndgameInfo();
     }
 
     private static boolean isGameOver(){
@@ -129,7 +124,7 @@ public class Main {
             System.out.print("Введите символ: ");
             input = SCANNER.nextLine();
 
-            if(checkLetterTooLong(input)){
+            if(isLetterTooLong(input)){
                 System.out.println("Введана строка. Необходимо ввести символ");
             }else if (!isRussianLetter(input.charAt(0))){
                 System.out.println("Введён некорректный символ. Символ должен быть буквой русского алфавита");
@@ -147,12 +142,12 @@ public class Main {
         return (symbol >= 'а' && symbol <= 'я') || symbol == 'ё';
     }
 
-    private static boolean checkLetterTooLong(String input){
+    private static boolean isLetterTooLong(String input){
 
         return input.length() > 1;
     }
 
-    private static void showSessionInfo(int[] indexOfWordLetter, Set<String> enteredLetters){
+    private static void printSessionInfo(int[] indexOfWordLetter, Set<String> enteredLetters){
         System.out.println("Ошибки: " + errors);
         System.out.print("Введённые буквы: ");
 
@@ -162,10 +157,20 @@ public class Main {
 
         System.out.print("\nСлово: ");
         printCorrectLetters(indexOfWordLetter, word);
-        showGallows();
+        printGallows();
     }
 
-    private static void showGallows(){
+    private static void printEndgameInfo(){
+
+        if (errors == FATAL){
+            System.out.println("ПОРАЖЕНИЕ!!!");
+            System.out.printf("\nЗагаданное слово: %s", word);
+        } else{
+            System.out.println("ПОБЕДА!!!");
+        }
+    }
+
+    private static void printGallows(){
         final String NO_ERRORS = """
                               ----------
                               |/     |
