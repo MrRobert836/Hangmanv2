@@ -12,6 +12,7 @@ public class Main {
     private static final int DEFAULT_ARRAY_VALUE = 0;
     private static final Path PATH_OF_NOUNS_FILE = Path.of("src/resources/Nouns.txt");
     private static int errors = 0;
+    private static int foundLetters = 0;
 
     public static void main(String[] args) throws IOException {
 
@@ -50,7 +51,6 @@ public class Main {
     }
 
     private static void gameSession(){
-        int foundLetters = 0;
         Set<String> enteredLetters = new HashSet<>();
         int[] indexOfWordLetter = new int[word.length()];
 
