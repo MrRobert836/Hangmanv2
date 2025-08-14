@@ -43,9 +43,10 @@ public class Main {
                     begin = false;
                     break;
 
-                }else
+                }else{
                     System.out.println("Некорректный ввод.");
-                System.out.printf("Необходимо ввести '%s' или '%s'.\n", BEGIN_THE_GAME, END_THE_GAME);
+                    System.out.printf("Необходимо ввести '%s' или '%s'.\n", BEGIN_THE_GAME, END_THE_GAME);
+                }
             }
         }
     }
@@ -72,8 +73,9 @@ public class Main {
 
                 errors++;
 
-                if (errors == FATAL)
+                if (errors == FATAL){
                     break;
+                }
 
                 continue;
             }
@@ -90,11 +92,11 @@ public class Main {
             }
         }
 
+        showSessionInfo(indexOfWordLetter, enteredLetters);
+
         if (errors == FATAL){
-            showSessionInfo(indexOfWordLetter, enteredLetters);
             System.out.println("ПОРАЖЕНИЕ!!!\n" + "Загаданное слово: " + word);
         } else{
-            showSessionInfo(indexOfWordLetter, enteredLetters);
             System.out.println("ПОБЕДА!!!");
         }
     }
@@ -109,11 +111,12 @@ public class Main {
 
     private static void printCorrectLetters (int [] indexOfWordLetter, String word){
         for (int i = 0; i < word.length(); i++){
-            if(indexOfWordLetter[i] == DEFAULT_ARRAY_VALUE)
+            if(indexOfWordLetter[i] == DEFAULT_ARRAY_VALUE){
                 System.out.print("_");
-            else
+            }else{
                 System.out.print(word.charAt(i));
-            System.out.print(".");
+                System.out.print(".");
+            }
         }
         System.out.println();
     }
@@ -126,12 +129,13 @@ public class Main {
             System.out.print("Введите символ: ");
             input = SCANNER.nextLine();
 
-            if(checkLetterTooLong(input))
+            if(checkLetterTooLong(input)){
                 System.out.println("Введана строка. Необходимо ввести символ");
-            else if (!isRussianLetter(input.charAt(0)))
+            }else if (!isRussianLetter(input.charAt(0))){
                 System.out.println("Введён некорректный символ. Символ должен быть буквой русского алфавита");
-            else
+            }else{
                 break;
+            }
         }
 
         return input.toLowerCase();
@@ -158,10 +162,10 @@ public class Main {
 
         System.out.print("\nСлово: ");
         printCorrectLetters(indexOfWordLetter, word);
-        Gallows(errors);
+        showGallows();
     }
 
-    private static void Gallows(int errors){
+    private static void showGallows(){
         final String NO_ERRORS = """
                               ----------
                               |/     |
