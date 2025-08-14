@@ -115,8 +115,8 @@ public class Main {
                 System.out.print("_");
             }else{
                 System.out.print(word.charAt(i));
-                System.out.print(".");
             }
+            System.out.print(".");
         }
         System.out.println();
     }
