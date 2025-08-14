@@ -52,6 +52,8 @@ public class Main {
     }
 
     private static void gameSession(){
+        foundLetters = 0;
+        errors = 0;
         Set<String> enteredLetters = new HashSet<>();
         int[] indexOfWordLetter = new int[word.length()];
 
@@ -164,7 +166,7 @@ public class Main {
 
         if (errors == FATAL){
             System.out.println("ПОРАЖЕНИЕ!!!");
-            System.out.printf("\nЗагаданное слово: %s", word);
+            System.out.printf("Загаданное слово: %s\n", word);
         } else{
             System.out.println("ПОБЕДА!!!");
         }
