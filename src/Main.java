@@ -19,8 +19,8 @@ public class Main {
         boolean begin = true;
 
         while(begin){
-            System.out.println("Введите 'Да' если хотите начать новую игру. " +
-                    "\nВведите 'Нет' если хотите выйти из игры");
+            System.out.printf("Введите %s если хотите начать новую игру. \n", BEGIN_THE_GAME);
+            System.out.printf("Введите %s если хотите выйти из игры. \n", END_THE_GAME);
 
             while(true){
 
@@ -148,7 +148,7 @@ public class Main {
     }
 
     private static void printSessionInfo(int[] indexOfWordLetter, Set<String> enteredLetters){
-        System.out.println("Ошибки: " + errors);
+        System.out.printf("Ошибки: %s\n", errors);
         System.out.print("Введённые буквы: ");
 
         for (String enteredLetter: enteredLetters){
