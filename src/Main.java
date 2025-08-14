@@ -73,10 +73,6 @@ public class Main {
 
                 errors++;
 
-                if (errors == FATAL){
-                    break;
-                }
-
                 continue;
             }
 
@@ -102,7 +98,7 @@ public class Main {
     }
 
     private static boolean isGameOver(){
-        return foundLetters < word.length() || errors == FATAL;
+        return foundLetters == word.length() || errors == FATAL;
     }
 
     private static void newGameWord() throws IOException {
