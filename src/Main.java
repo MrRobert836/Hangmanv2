@@ -5,14 +5,16 @@ import java.nio.file.Files;
 
 public class Main {
     private static String word;
+    private static int errors;
+    private static int foundLetters;
+    private static StringBuilder mask;
+
     private static final Scanner SCANNER = new Scanner(System.in);
+    private static final Path PATH_OF_NOUNS_FILE = Path.of("src/resources/Nouns.txt");
+
     private static final String BEGIN_THE_GAME = "Да";
     private static final String END_THE_GAME = "Нет";
     private static final int FATAL = 6;
-    private static final int DEFAULT_ARRAY_VALUE = 0;
-    private static final Path PATH_OF_NOUNS_FILE = Path.of("src/resources/Nouns.txt");
-    private static int errors = 0;
-    private static int foundLetters = 0;
 
     public static void main(String[] args) throws IOException {
 
@@ -55,11 +57,12 @@ public class Main {
         foundLetters = 0;
         errors = 0;
         Set<String> enteredLetters = new HashSet<>();
-        int[] indexOfWordLetter = new int[word.length()];
+        mask = new StringBuilder("*");
+        initializeMask();
 
         while(!isGameOver()){
 
-            printSessionInfo(indexOfWordLetter, enteredLetters);
+            printSessionInfo(enteredLetters);
             String letter = enterGameLetter();
 
             if(enteredLetters.contains(letter)){
@@ -78,19 +81,21 @@ public class Main {
                 continue;
             }
 
+            char let = letter.charAt(0);
+
             for (int i = 0; i < word.length(); i++) {
 
-                String wordLetter = Character.toString(word.charAt(i));
+                char wordLetter = word.charAt(i);
 
-                if(letter.equalsIgnoreCase(wordLetter)){
+                if(let == wordLetter){
                     foundLetters++;
-                    //В массиве хранятся номера букв секретного слова с 1, а не с 0
-                    indexOfWordLetter[i] = i + 1;
+
+                    mask.setCharAt(i, let);
                 }
             }
         }
 
-        printSessionInfo(indexOfWordLetter, enteredLetters);
+        printSessionInfo(enteredLetters);
         printEndgameInfo();
     }
 
@@ -106,16 +111,8 @@ public class Main {
         word = words.get(random.nextInt(words.size()));
     }
 
-    private static void printCorrectLetters (int [] indexOfWordLetter, String word){
-        for (int i = 0; i < word.length(); i++){
-            if(indexOfWordLetter[i] == DEFAULT_ARRAY_VALUE){
-                System.out.print("_");
-            }else{
-                System.out.print(word.charAt(i));
-            }
-            System.out.print(".");
-        }
-        System.out.println();
+    private static void initializeMask (){
+        mask.append("*".repeat(word.length() - 1));
     }
 
     private static String enterGameLetter(){
@@ -149,7 +146,7 @@ public class Main {
         return input.length() > 1;
     }
 
-    private static void printSessionInfo(int[] indexOfWordLetter, Set<String> enteredLetters){
+    private static void printSessionInfo(Set<String> enteredLetters){
         System.out.printf("Ошибки: %s\n", errors);
         System.out.print("Введённые буквы: ");
 
@@ -157,8 +154,7 @@ public class Main {
             System.out.print(enteredLetter + ", ");
         }
 
-        System.out.print("\nСлово: ");
-        printCorrectLetters(indexOfWordLetter, word);
+        System.out.printf("\nСлово: %s\n", mask);
         printGallows();
     }
 
