@@ -33,7 +33,7 @@ public class Main {
 
                     if(Files.exists(PATH_OF_NOUNS_FILE)){
                         chooseSecretWord();
-                        gameSession();
+                        playSession();
                         printEndgameInfo();
                     }else{
                         System.out.println("Файл со словами не найден. Игра будет завершена");
@@ -53,7 +53,7 @@ public class Main {
         }
     }
 
-    private static void gameSession(){
+    private static void playSession(){
 
         initializeVariables();
 
