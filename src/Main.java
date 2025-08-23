@@ -60,7 +60,7 @@ public class Main {
         while(!isGameOver()){
 
             printSessionInfo();
-            char letter = enterGameLetter();
+            char letter = enterLetter();
 
             if(enteredLetters.contains(letter)){
                 System.out.println("Данная буква уже была введена");
@@ -114,7 +114,7 @@ public class Main {
         mask.append("*".repeat(word.length() - 1));
     }
 
-    private static char enterGameLetter(){
+    private static char enterLetter(){
 
         String input;
 
