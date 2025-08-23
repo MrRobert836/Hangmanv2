@@ -32,7 +32,7 @@ public class Main {
                 if (command.equalsIgnoreCase(BEGIN_THE_GAME)) {
 
                     if(Files.exists(PATH_OF_NOUNS_FILE)){
-                        newGameWord();
+                        chooseSecretWord();
                         gameSession();
                         printEndgameInfo();
                     }else{
@@ -98,7 +98,7 @@ public class Main {
         return foundLetters == word.length() || errors == FATAL;
     }
 
-    private static void newGameWord() throws IOException {
+    private static void chooseSecretWord() throws IOException {
 
         List<String> words = Files.readAllLines(PATH_OF_NOUNS_FILE);
 
