@@ -73,10 +73,6 @@ public class Main {
 
             if(indexOfLetter < 0){
                 errors++;
-
-                if (errors == FATAL){
-                    break;
-                }
                 continue;
             }
 
