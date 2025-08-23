@@ -15,6 +15,10 @@ public class Main {
     private static final String BEGIN_THE_GAME = "Да";
     private static final String END_THE_GAME = "Нет";
     private static final int FATAL = 6;
+    private static final int DEFAULT_ARRAY_VALUE = 0;
+    private static final Path PATH_OF_NOUNS_FILE = Path.of("src/resources/Nouns.txt");
+    private static int errors = 0;
+    private static int foundLetters = 0;
 
     public static void main(String[] args) throws IOException {
 
@@ -77,6 +81,10 @@ public class Main {
             if(indexOfLetter < 0){
 
                 errors++;
+
+                if (errors == FATAL){
+                    break;
+                }
 
                 continue;
             }
