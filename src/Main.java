@@ -7,7 +7,7 @@ public class Main {
     private static String word;
     private static int errors;
     private static int foundLetters;
-    private static Set<String> enteredLetters;
+    private static Set<Character> enteredLetters;
     private static StringBuilder mask;
 
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -60,7 +60,7 @@ public class Main {
         while(!isGameOver()){
 
             printSessionInfo();
-            String letter = enterGameLetter();
+            char letter = enterGameLetter();
 
             if(enteredLetters.contains(letter)){
                 System.out.println("Данная буква уже была введена");
@@ -80,15 +80,13 @@ public class Main {
                 continue;
             }
 
-            char let = letter.charAt(0);
-
             for (int i = 0; i < word.length(); i++) {
 
                 char wordLetter = word.charAt(i);
 
-                if(let == wordLetter){
+                if(letter == wordLetter){
                     foundLetters++;
-                    mask.setCharAt(i, let);
+                    mask.setCharAt(i, letter);
                 }
             }
         }
@@ -116,7 +114,7 @@ public class Main {
         mask.append("*".repeat(word.length() - 1));
     }
 
-    private static String enterGameLetter(){
+    private static char enterGameLetter(){
 
         String input;
 
@@ -133,7 +131,7 @@ public class Main {
             }
         }
 
-        return input.toLowerCase();
+        return input.toLowerCase().charAt(0);
     }
 
     private static boolean isRussianLetter(char symbol){
@@ -150,7 +148,7 @@ public class Main {
         System.out.printf("Ошибки: %s\n", errors);
         System.out.print("Введённые буквы: ");
 
-        for (String enteredLetter: enteredLetters){
+        for (Character enteredLetter: enteredLetters){
             System.out.print(enteredLetter + ", ");
         }
 
