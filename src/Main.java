@@ -7,6 +7,7 @@ public class Main {
     private static String word;
     private static int errors;
     private static int foundLetters;
+    private static Set<String> enteredLetters;
     private static StringBuilder mask;
 
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -33,6 +34,7 @@ public class Main {
                     if(Files.exists(PATH_OF_NOUNS_FILE)){
                         newGameWord();
                         gameSession();
+                        printEndgameInfo();
                     }else{
                         System.out.println("Файл со словами не найден. Игра будет завершена");
                         begin = false;
@@ -41,10 +43,8 @@ public class Main {
                     break;
 
                 }else if(command.equalsIgnoreCase(END_THE_GAME)){
-
                     begin = false;
                     break;
-
                 }else{
                     System.out.println("Некорректный ввод.");
                     System.out.printf("Необходимо ввести '%s' или '%s'.\n", BEGIN_THE_GAME, END_THE_GAME);
@@ -54,15 +54,12 @@ public class Main {
     }
 
     private static void gameSession(){
-        foundLetters = 0;
-        errors = 0;
-        Set<String> enteredLetters = new HashSet<>();
-        mask = new StringBuilder("*");
-        initializeMask();
+
+        initializeVariables();
 
         while(!isGameOver()){
 
-            printSessionInfo(enteredLetters);
+            printSessionInfo();
             String letter = enterGameLetter();
 
             if(enteredLetters.contains(letter)){
@@ -75,13 +72,11 @@ public class Main {
             int indexOfLetter = word.indexOf(letter);
 
             if(indexOfLetter < 0){
-
                 errors++;
 
                 if (errors == FATAL){
                     break;
                 }
-
                 continue;
             }
 
@@ -93,14 +88,12 @@ public class Main {
 
                 if(let == wordLetter){
                     foundLetters++;
-
                     mask.setCharAt(i, let);
                 }
             }
         }
 
-        printSessionInfo(enteredLetters);
-        printEndgameInfo();
+        printSessionInfo();
     }
 
     private static boolean isGameOver(){
@@ -115,7 +108,11 @@ public class Main {
         word = words.get(random.nextInt(words.size()));
     }
 
-    private static void initializeMask (){
+    private static void initializeVariables(){
+        foundLetters = 0;
+        errors = 0;
+        enteredLetters = new HashSet<>();
+        mask = new StringBuilder("*");
         mask.append("*".repeat(word.length() - 1));
     }
 
@@ -146,11 +143,10 @@ public class Main {
     }
 
     private static boolean isLetterTooLong(String input){
-
         return input.length() > 1;
     }
 
-    private static void printSessionInfo(Set<String> enteredLetters){
+    private static void printSessionInfo(){
         System.out.printf("Ошибки: %s\n", errors);
         System.out.print("Введённые буквы: ");
 
