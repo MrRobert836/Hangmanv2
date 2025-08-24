@@ -118,9 +118,11 @@ public class Main {
             System.out.print("Введите символ: ");
             input = SCANNER.nextLine();
 
-            if(isLetterTooLong(input)){
+            if(input.isBlank()){
+                System.out.println("Введена пустая строка");
+            }else if (isLetterTooLong(input)) {
                 System.out.println("Введана строка. Необходимо ввести символ");
-            }else if (!isRussianLetter(input.charAt(0))){
+            } else if (!isRussianLetter(input.charAt(0))){
                 System.out.println("Введён некорректный символ. Символ должен быть буквой русского алфавита");
             }else{
                 break;
