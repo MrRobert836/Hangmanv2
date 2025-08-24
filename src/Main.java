@@ -17,7 +17,7 @@ public class Main {
     private static final String END_THE_GAME = "Нет";
     private static final int FATAL = 6;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         boolean begin = true;
 
@@ -94,9 +94,15 @@ public class Main {
         return foundLetters == word.length() || errors == FATAL;
     }
 
-    private static void chooseSecretWord() throws IOException {
+    private static void chooseSecretWord() {
 
-        List<String> words = Files.readAllLines(PATH_OF_NOUNS_FILE);
+        List<String> words;
+
+        try {
+            words = Files.readAllLines(PATH_OF_NOUNS_FILE);
+        } catch (IOException e){
+            throw new RuntimeException(e);
+        }
 
         Random random = new Random();
         word = words.get(random.nextInt(words.size()));
