@@ -157,7 +157,7 @@ public class Main {
         }
 
         System.out.printf("\nСлово: %s\n", mask);
-        printGallows();
+        Gallows.printPicture(errors);
     }
 
     private static void printEndgameInfo(){
@@ -167,122 +167,6 @@ public class Main {
             System.out.printf("Загаданное слово: %s\n", word);
         } else{
             System.out.println("ПОБЕДА!!!");
-        }
-    }
-
-    private static void printGallows(){
-        final String NO_ERRORS = """
-                              ----------
-                              |/     |
-                              |
-                              |
-                              |
-                              |
-                              |
-                              |
-                              |
-                            __|________
-                            |         |\
-                    """;
-
-        final String AD_HEAD = """
-                              ----------
-                              |/     |
-                              |     ( )
-                              |
-                              |
-                              |
-                              |
-                              |
-                              |
-                            __|________
-                            |         |\
-                    """;
-
-        final String AD_BODY = """
-                              ----------
-                              |/     |
-                              |     ( )
-                              |     _|_
-                              |      |\s
-                              |      |
-                              |      \s
-                              |      \s
-                              |
-                            __|________
-                            |         |\
-                    """;
-
-        final String AD_FIRST_ARM = """
-                              ----------
-                              |/     |
-                              |     ( )
-                              |     _|_
-                              |    / |\s
-                              |      |
-                              |      \s
-                              |      \s
-                              |
-                            __|________
-                            |         |\
-                    """;
-
-        final String AD_LAST_ARM = """
-                              ----------
-                              |/     |
-                              |     ( )
-                              |     _|_
-                              |    / | \\\\
-                              |      |
-                              |      \s
-                              |      \s
-                              |
-                            __|________
-                            |         |\
-                    """;
-
-        final String AD_LEG = """
-                              ----------
-                              |/     |
-                              |     ( )
-                              |     _|_
-                              |    / | \\\\
-                              |      |
-                              |     /\s
-                              |    / \s
-                              |
-                            __|________
-                            |         |\
-                    """;
-
-        final String GAME_OVER = """
-                              ----------
-                              |/     |
-                              |     ( )
-                              |     _|_
-                              |    / | \\\\
-                              |      |
-                              |     /\s
-                              |    /   \\\\
-                              |
-                            __|________
-                            |         |\
-                    """;
-
-        switch(errors){
-            case 0: System.out.println(NO_ERRORS);
-                break;
-            case 1: System.out.println(AD_HEAD);
-                break;
-            case 2: System.out.println(AD_BODY);
-                break;
-            case 3: System.out.println(AD_FIRST_ARM);
-                break;
-            case 4: System.out.println(AD_LAST_ARM);
-                break;
-            case 5: System.out.println(AD_LEG);
-                break;
-            case 6: System.out.println(GAME_OVER);
         }
     }
 }
