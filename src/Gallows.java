@@ -59,7 +59,7 @@ public class Gallows {
             }
     };
 
-    private static void printPicture(int numPicture){
+    public static void printPicture(int numPicture){
         String[] picture = PICTURES[numPicture];
 
         for(String line: picture){
