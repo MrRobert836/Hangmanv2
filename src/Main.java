@@ -32,7 +32,7 @@ public class Main {
                 if (command.equalsIgnoreCase(BEGIN_THE_GAME)) {
 
                     if(Files.exists(PATH_OF_NOUNS_FILE)){
-                        chooseSecretWord();
+                        getRandomWord();
                         playSession();
                         printEndgameInfo();
                         clearSession();
@@ -61,7 +61,7 @@ public class Main {
         while(!isGameOver()){
 
             printSessionInfo();
-            char letter = enterLetter();
+            char letter = getLetter();
 
             if(ENTERED_LETTERS.contains(letter)){
                 System.out.println("Данная буква уже была введена");
@@ -95,7 +95,7 @@ public class Main {
         return foundLetters == word.length() || errors == FATAL;
     }
 
-    private static void chooseSecretWord() {
+    private static void getRandomWord() {
 
         List<String> words;
 
@@ -116,7 +116,7 @@ public class Main {
         MASK.setLength(0);
     }
 
-    private static char enterLetter(){
+    private static char getLetter(){
 
         String input;
 
