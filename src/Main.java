@@ -124,7 +124,7 @@ public class Main {
             System.out.print("Введите символ: ");
             input = SCANNER.nextLine();
 
-            if(input.isBlank()){
+            if(isVoidOrWhitespace(input)){
                 System.out.println("Введена пустая строка");
             }else if (isLetterTooLong(input)) {
                 System.out.println("Введана строка. Необходимо ввести символ");
@@ -146,6 +146,10 @@ public class Main {
 
     private static boolean isLetterTooLong(String input){
         return input.length() > 1;
+    }
+
+    private static boolean isVoidOrWhitespace (String input){
+        return input.isBlank();
     }
 
     private static void printSessionInfo(){
