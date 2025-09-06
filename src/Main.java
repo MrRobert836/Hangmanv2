@@ -5,11 +5,11 @@ import java.nio.file.Files;
 
 public class Main {
     private static String word;
-    private static int errors;
-    private static int foundLetters;
-    private static Set<Character> enteredLetters;
-    private static StringBuilder mask;
+    private static int errors = 0;
+    private static int foundLetters = 0;
 
+    private static final Set<Character> ENTERED_LETTERS = new LinkedHashSet<>();
+    private static final StringBuilder MASK = new StringBuilder();
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final Path PATH_OF_NOUNS_FILE = Path.of("src/resources/Nouns.txt");
 
@@ -35,6 +35,7 @@ public class Main {
                         chooseSecretWord();
                         playSession();
                         printEndgameInfo();
+                        clearSession();
                     }else{
                         System.out.println("Файл со словами не найден. Игра будет завершена");
                         begin = false;
@@ -55,18 +56,18 @@ public class Main {
 
     private static void playSession(){
 
-        initializeVariables();
+        MASK.append("*".repeat(word.length()));
 
         while(!isGameOver()){
 
             printSessionInfo();
             char letter = enterLetter();
 
-            if(enteredLetters.contains(letter)){
+            if(ENTERED_LETTERS.contains(letter)){
                 System.out.println("Данная буква уже была введена");
                 continue;
             }else {
-                enteredLetters.add(letter);
+                ENTERED_LETTERS.add(letter);
             }
 
             int indexOfLetter = word.indexOf(letter);
@@ -82,7 +83,7 @@ public class Main {
 
                 if(letter == wordLetter){
                     foundLetters++;
-                    mask.setCharAt(i, letter);
+                    MASK.setCharAt(i, letter);
                 }
             }
         }
@@ -108,12 +109,11 @@ public class Main {
         word = words.get(random.nextInt(words.size()));
     }
 
-    private static void initializeVariables(){
+    private static void clearSession(){
         foundLetters = 0;
         errors = 0;
-        enteredLetters = new LinkedHashSet<>();
-        mask = new StringBuilder();
-        mask.append("*".repeat(word.length()));
+        ENTERED_LETTERS.clear();
+        MASK.setLength(0);
     }
 
     private static char enterLetter(){
@@ -157,13 +157,13 @@ public class Main {
         System.out.print("Введённые буквы: ");
         printEnteredLetters();
 
-        System.out.printf("\nСлово: %s\n", mask);
+        System.out.printf("\nСлово: %s\n", MASK);
         Gallows.printPicture(errors);
     }
 
     private static void printEnteredLetters(){
-        if (!enteredLetters.isEmpty()) {
-            Iterator<Character> iterator = enteredLetters.iterator();
+        if (!ENTERED_LETTERS.isEmpty()) {
+            Iterator<Character> iterator = ENTERED_LETTERS.iterator();
 
             System.out.print(iterator.next());
 
