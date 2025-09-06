@@ -158,7 +158,7 @@ public class Main {
         printEnteredLetters();
 
         System.out.printf("\nСлово: %s\n", MASK);
-        Gallows.printPicture(errors);
+        GallowsGraphics.printPicture(errors);
     }
 
     private static void printEnteredLetters(){

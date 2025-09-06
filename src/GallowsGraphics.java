@@ -1,4 +1,4 @@
-public class Gallows {
+public class GallowsGraphics {
 
     private static final String[][] PICTURES = {
             {
