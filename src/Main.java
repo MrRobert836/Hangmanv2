@@ -112,8 +112,8 @@ public class Main {
         foundLetters = 0;
         errors = 0;
         enteredLetters = new HashSet<>();
-        mask = new StringBuilder("*");
-        mask.append("*".repeat(word.length() - 1));
+        mask = new StringBuilder();
+        mask.append("*".repeat(word.length()));
     }
 
     private static char enterLetter(){
