@@ -153,7 +153,7 @@ public class Main {
     }
 
     private static void printSessionInfo(){
-        System.out.printf("Ошибки: %s\n", errors);
+        System.out.printf("Количество ошибок: %s\n", errors);
         System.out.print("Введённые буквы: ");
         printEnteredLetters();
 
