@@ -111,7 +111,7 @@ public class Main {
     private static void initializeVariables(){
         foundLetters = 0;
         errors = 0;
-        enteredLetters = new HashSet<>();
+        enteredLetters = new LinkedHashSet<>();
         mask = new StringBuilder();
         mask.append("*".repeat(word.length()));
     }
@@ -155,13 +155,23 @@ public class Main {
     private static void printSessionInfo(){
         System.out.printf("Ошибки: %s\n", errors);
         System.out.print("Введённые буквы: ");
-
-        for (Character enteredLetter: enteredLetters){
-            System.out.print(enteredLetter + ", ");
-        }
+        printEnteredLetters();
 
         System.out.printf("\nСлово: %s\n", mask);
         Gallows.printPicture(errors);
+    }
+
+    private static void printEnteredLetters(){
+        if (!enteredLetters.isEmpty()) {
+            Iterator<Character> iterator = enteredLetters.iterator();
+
+            System.out.print(iterator.next());
+
+            while (iterator.hasNext()){
+
+                System.out.printf(", %s", iterator.next());
+            }
+        }
     }
 
     private static void printEndgameInfo(){
