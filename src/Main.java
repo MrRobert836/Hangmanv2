@@ -11,7 +11,7 @@ public class Main {
     private static final Set<Character> ENTERED_LETTERS = new LinkedHashSet<>();
     private static final StringBuilder MASK = new StringBuilder();
     private static final Scanner SCANNER = new Scanner(System.in);
-    private static final Path PATH_OF_NOUNS_FILE = Path.of("src/resources/Nouns.txt");
+    private static final Path PATH_OF_FILE = Path.of("src/resources/Nouns.txt");
 
     private static final String BEGIN_THE_GAME = "Да";
     private static final String END_THE_GAME = "Нет";
@@ -31,7 +31,7 @@ public class Main {
 
                 if (command.equalsIgnoreCase(BEGIN_THE_GAME)) {
 
-                    if(Files.exists(PATH_OF_NOUNS_FILE)){
+                    if(Files.exists(PATH_OF_FILE)){
                         getRandomWord();
                         playSession();
                         printEndgameInfo();
@@ -100,7 +100,7 @@ public class Main {
         List<String> words;
 
         try {
-            words = Files.readAllLines(PATH_OF_NOUNS_FILE);
+            words = Files.readAllLines(PATH_OF_FILE);
         } catch (IOException e){
             throw new RuntimeException(e);
         }
