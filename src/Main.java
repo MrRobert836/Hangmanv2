@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.nio.file.Path;
@@ -52,6 +53,17 @@ public class Main {
                 }
             }
         }
+    }
+
+    private static boolean isWordsExist(){
+
+        File file = new File("src/resources/Nouns.txt");
+
+        /*if(Files.exists(PATH_OF_FILE)){
+            if()
+        }*/
+
+        return Files.exists(PATH_OF_FILE);
     }
 
     private static void playSession(){
