@@ -124,9 +124,9 @@ public class Main {
             System.out.print("Введите символ: ");
             input = SCANNER.nextLine();
 
-            if(isVoidOrWhitespace(input)){
+            if(input.isBlank()){
                 System.out.println("Введена пустая строка");
-            }else if (isLetterTooLong(input)) {
+            }else if (input.length() > 1) {
                 System.out.println("Введана строка. Необходимо ввести символ");
             } else if (!isRussianLetter(input.charAt(0))){
                 System.out.println("Введён некорректный символ. Символ должен быть буквой русского алфавита");
@@ -142,14 +142,6 @@ public class Main {
 
         symbol = Character.toLowerCase(symbol);
         return (symbol >= 'а' && symbol <= 'я') || symbol == 'ё';
-    }
-
-    private static boolean isLetterTooLong(String input){
-        return input.length() > 1;
-    }
-
-    private static boolean isVoidOrWhitespace (String input){
-        return input.isBlank();
     }
 
     private static void printSessionInfo(){
